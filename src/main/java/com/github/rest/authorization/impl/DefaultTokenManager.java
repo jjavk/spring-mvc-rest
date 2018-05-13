@@ -1,6 +1,7 @@
 package com.github.rest.authorization.impl;
 
 import com.github.rest.authorization.TokenManager;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.UUID;
@@ -9,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by jiabin on 2018/5/13.
  */
+@Component("tokenManager")
 public class DefaultTokenManager implements TokenManager {
     private static Map<String, String> tokenMap = new ConcurrentHashMap<>();
 

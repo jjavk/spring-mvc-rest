@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -25,12 +26,8 @@ import java.lang.reflect.Method;
 public class SecurityAspect {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Autowired
     private TokenManager tokenManager;
-
-    @Resource(name = "tokenManager")
-    public void setTokenManager(TokenManager tokenManager) {
-        this.tokenManager = tokenManager;
-    }
 
     @Around("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
     public Object execute(ProceedingJoinPoint pjp) throws Throwable {

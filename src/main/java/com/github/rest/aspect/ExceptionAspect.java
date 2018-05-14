@@ -1,6 +1,7 @@
 package com.github.rest.aspect;
 
 import com.github.rest.exception.TokenException;
+import com.github.rest.response.ErrorCode;
 import com.github.rest.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,7 @@ public class ExceptionAspect {
     public Response handleHttpMessageNotReadableException(
             HttpMessageNotReadableException e) {
         logger.error("could_not_read_json...", e);
-        return new Response().failure("could_not_read_json");
+        return Response.fail("could_not_read_json");
     }
 
 
@@ -36,7 +37,7 @@ public class ExceptionAspect {
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public Response handleValidationException(MethodArgumentNotValidException e) {
         logger.error("parameter_validation_exception...", e);
-        return new Response().failure("parameter_validation_exception");
+        return Response.fail("parameter_validation_exception");
     }
 
 
@@ -45,7 +46,7 @@ public class ExceptionAspect {
     public Response handleHttpRequestMethodNotSupportedException(
             HttpRequestMethodNotSupportedException e) {
         logger.error("request_method_not_supported...", e);
-        return new Response().failure("request_method_not_supported");
+        return Response.httpStatus(HttpStatus.METHOD_NOT_ALLOWED);
     }
 
 
@@ -53,7 +54,7 @@ public class ExceptionAspect {
     @ExceptionHandler({ HttpMediaTypeNotSupportedException.class })
     public Response handleHttpMediaTypeNotSupportedException(Exception e) {
         logger.error("content_type_not_supported...", e);
-        return new Response().failure("content_type_not_supported");
+        return Response.httpStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
     }
 
 
@@ -61,7 +62,7 @@ public class ExceptionAspect {
     @ExceptionHandler(TokenException.class)
     public Response handleTokenException(Exception e) {
         logger.error("Token is invaild...", e);
-        return new Response().failure("Token is invaild");
+        return Response.fail("Token is invaild");
     }
 
 
@@ -69,6 +70,6 @@ public class ExceptionAspect {
     @ExceptionHandler(Exception.class)
     public Response handleException(Exception e) {
         logger.error("Internal Server Error...", e);
-        return new Response().failure("Internal Server Error");
+        return Response.fail();
     }
 }

@@ -24,7 +24,7 @@ public class DefaultTokenManager implements TokenManager {
 
     @Override
     public boolean checkToken(String token) {
-        return !isNotEmpty(token) && tokenMap.containsKey(token);
+        return  isNotEmpty(token) && tokenMap.containsKey(token);
     }
 
     @Override

@@ -62,7 +62,7 @@ public class ExceptionAspect {
     @ExceptionHandler(TokenException.class)
     public Response handleTokenException(Exception e) {
         logger.error("Token is invaild...", e);
-        return Response.fail("Token is invaild");
+        return Response.fail(ErrorCode.UNLOGIN_ERROR);
     }
 
 

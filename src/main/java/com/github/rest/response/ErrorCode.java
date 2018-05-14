@@ -8,6 +8,7 @@ public enum ErrorCode {
     PARAMETER_CHECK_ERROR(400, "参数校验错误"),
     AUTH_VALID_ERROR(701, "用户权限不足"),
     UNLOGIN_ERROR(401, "用户未登录或登录状态超时失效"),
+    LOGIN_ERROR(401, "用户名或密码错误")
     ;
 
     private final Integer value;
